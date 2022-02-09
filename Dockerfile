@@ -16,7 +16,7 @@ RUN pip install --upgrade pip
 #Install Depedencies
 RUN pip install -r requirements.txt
 
-EXPOSE 8090
+EXPOSE 8091
 
 # command to run on container start
 CMD [ "python", "/code/app.py" ]
