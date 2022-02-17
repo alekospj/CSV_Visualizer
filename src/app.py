@@ -7,20 +7,18 @@ from dash import dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-import plotly.graph_objects as go
-
 import plotly.express as px
-
 
 #Python
 import os
-
 
 #Others
 import base64
 import pandas as pd
 
+#My imports
 from toolbox import create_full_dir
+from visualization import visuzlize
 
 
 # #Read Users
@@ -128,27 +126,7 @@ def graph_results(selectedFile):
         df = pd.read_csv(UPLOAD_DIRECTORY+selectedFile)
         df = df.dropna()
 
-        # Make lowercase all titles and replace them
-        cols = df.columns.tolist()
-        cols = [each_string.lower() for each_string in cols]
-        df = df.set_axis(cols, axis=1)
-
-
-        fig = go.Figure()
-
-
-        if 'time' in cols:
-            fig = px.line(df, x='time', y=df.columns)
-
-        elif 'date' in cols:
-            fig = px.line(df, x='date', y=df.columns)
-
-        else:
-            fig = px.line(df,y=df.columns)
-
-
-        fig.update_layout(autosize=False, height=655)
-
+        fig = visuzlize(df)
 
         return fig
 
@@ -189,4 +167,4 @@ def upload_pdf_to_server(content, filename):
 
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=8091, debug=False, use_reloader=False)
+    app.run_server(host='0.0.0.0', port=8090, debug=False, use_reloader=False)
