@@ -167,4 +167,4 @@ def upload_pdf_to_server(content, filename):
 
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=8090, debug=False, use_reloader=False)
+    app.run_server(host='0.0.0.0', port=8091, debug=False, use_reloader=False)
